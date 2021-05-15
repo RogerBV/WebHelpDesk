@@ -86,13 +86,13 @@ namespace WebHelpDesk.Controllers
             var list = this._requestService.ListRequestsByStateAndUser(getIdUserLogged(), State);
             return Json(list);
         }
-        [HttpGet]
+        /*[HttpGet]
         public JsonResult ListRequests(int State,int UserId)
         {
             var list = this._requestService.List();
 
             return Json(list);
-        }
+        }*/
         [HttpGet]
         public JsonResult ListRequestsByState(int State)
         {
