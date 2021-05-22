@@ -29,6 +29,12 @@ namespace WebHelpDesk.Controllers
             var registeredModule = this._moduleService.Create(createModule);
             return Json(registeredModule);
         }
+        [HttpPut]
+        public ActionResult UpdateModule(UpdateModule updateModule)
+        {
+            var registeredModule = this._moduleService.Update(updateModule);
+            return Json(registeredModule);
+        }
         public IActionResult Index()
         {
             return View();

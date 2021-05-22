@@ -23,6 +23,10 @@ namespace WebHelpDesk
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache(); //This way ASP.NET Core will use a Memory Cache to store session variables
             services.AddSession(options =>
@@ -45,7 +49,10 @@ namespace WebHelpDesk
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseCors(options => options.AllowAnyOrigin());
+            app.UseCors(options => options.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

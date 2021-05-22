@@ -38,7 +38,14 @@ namespace Services.Implementation.SQL
 
         public RegisteredModule Update(UpdateModule updateRegistry)
         {
-            throw new NotImplementedException();
+            using (HelpDeskDataContext helpDeskDataContext = new HelpDeskDataContext())
+            {
+                var module = updateRegistry.ToEntity();
+                helpDeskDataContext.Modules.Attach(module);
+                helpDeskDataContext.Entry(module).Property(x => x.Name).IsModified = true;
+                helpDeskDataContext.SaveChanges();
+                return module.ToDTO();
+            }
         }
     }
 }

@@ -17,6 +17,15 @@ namespace Infrastructure.DataMapping
                 ,State = 1
             };
         }
+        public static Module ToEntity(this UpdateModule updateModule)
+        {
+            return new Module()
+            {
+                 Id = updateModule.ModuleId
+                ,Name = updateModule.Name
+                ,CreateDate = DateTime.Now
+            };
+        }
         public static RegisteredModule ToDTO(this Module moduleOnDb)
         {
             return new RegisteredModule()
