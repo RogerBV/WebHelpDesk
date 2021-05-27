@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Implementation.SQL;
 using Services.Interfaces.Declarations;
+using Services.Interfaces.Requests;
 using System.Text.Json;
 namespace WebHelpDesk.Controllers
 {
@@ -22,22 +23,20 @@ namespace WebHelpDesk.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult LoginAuthenticate(string user, string pass)
+        public ActionResult LoginAuthenticate(LoginRequest loginRequest)
         {
-            var list = this._userService.Login(user, pass);
+            var list = this._userService.Login(loginRequest.User, loginRequest.Pass);
             
             if (list.Count > 0)
             {
-                
                 HttpContext.Session.SetString( "UserLogged", JsonSerializer.Serialize(list[0]).ToString());
                 return Json("1");
             }
             else {
                 return Json("0");
             }
-            
         }
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult LogOut()
         {
             try
@@ -50,6 +49,6 @@ namespace WebHelpDesk.Controllers
 
                 return Json("0");
             }
-        }
+        }*/
     }
 }
