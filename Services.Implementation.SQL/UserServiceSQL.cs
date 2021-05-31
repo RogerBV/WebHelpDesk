@@ -34,11 +34,19 @@ namespace Services.Implementation.SQL
                 return helpDeskDataContext.Users.ToList().Select(x => x.ToDTO()).ToList();
             }
         }
-        public List<RegisteredUser> Login(string user, string password)
+        public RegisteredUser ListUsersById(int userId)
+        {
+            using (HelpDeskDataContext helpDeskDataContext = new HelpDeskDataContext())
+            {
+                return helpDeskDataContext.Users.Where(x => x.Id == userId).ToList().Select(x => x.ToDTO()).ToList().First();
+            }
+                
+        }
+        public List<RegisteredUser> Login(LoginRequest loginRequest)
         {
             using (HelpDeskDataContext helpDeskDataContext = new HelpDeskDataContext()) 
             {
-                var list = helpDeskDataContext.Users.Where(x => x.UserName.Equals(user) && x.UserPassword.Equals(password)).ToList();
+                var list = helpDeskDataContext.Users.Where(x => x.UserName.Equals(loginRequest.User) && x.UserPassword.Equals(loginRequest.Pass)).ToList();
                 return list.Select(x => x.ToDTO()).ToList();
             }
         }

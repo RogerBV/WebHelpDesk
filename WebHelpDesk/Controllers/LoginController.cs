@@ -26,7 +26,7 @@ namespace WebHelpDesk.Controllers
         [HttpPost]
         public ActionResult LoginAuthenticate(LoginRequest loginRequest)
         {
-            var list = this._userService.Login(loginRequest.User, loginRequest.Pass);
+            var list = this._userService.Login(loginRequest);
             
             if (list.Count > 0)
             {
@@ -40,7 +40,7 @@ namespace WebHelpDesk.Controllers
         [HttpPost]
         public ActionResult LoginReturnUser(LoginRequest loginRequest)
         {
-            var list = this._userService.Login(loginRequest.User, loginRequest.Pass);
+            var list = this._userService.Login(loginRequest);
             if (list.Count > 0)
             {
                 return Json(list.First());

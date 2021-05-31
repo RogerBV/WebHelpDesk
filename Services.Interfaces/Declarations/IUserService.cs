@@ -9,6 +9,8 @@ namespace Services.Interfaces.Declarations
     public interface IUserService:
         ICRUDService<CreateUser,UpdateUser,RegisteredUser,DeletedUser>
     {
-        public List<RegisteredUser> Login(String user, string pass);
+        public List<RegisteredUser> Login(LoginRequest loginRequest);
+
+        public RegisteredUser ListUsersById(int userId);
     }
 }
